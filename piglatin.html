@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript Pig Latin Generator</title>
+</head>
+
+<body>
+<script>
+
+var pigLatin = function(input) {
+	console.log(input);
+
+	// convert the string to an array
+	input = input.split(' ');
+
+	// If word is capitalized, move capitalization to second letter
+	for (var x = 0; x < input.length; x++) {
+		if (input[x].charAt(0) === input[x].charAt(0).toUpperCase()) {
+			input[x] = input[x].charAt(0).toLowerCase() + input[x].charAt(1).toUpperCase() + input[x].substring(2,input[x].length);
+		}
+	}
+
+	// Add "way" or "ay" depending on whether the word begins with a vowel or consonant
+	for (var i = 0; i < input.length; i++) {
+		if (input[i].charAt(input[i].charAt(0)) == "a" || input[i].charAt(input[i].charAt(0)) == "e" || input[i].charAt(input[i].charAt(0)) == "i" || input[i].charAt(input[i].charAt(0)) == "o" || input[i].charAt(input[i].charAt(0)) == "u") {
+			input[i] = input[i] + "way";
+		} else {
+			input[i] = input[i].concat(input[i].charAt(0));
+			input[i] = input[i].slice(1);
+			input[i] = input[i] + "ay";
+		}
+	}
+
+	// Move any punctuation to the end of the word
+	for (var y = 0, r = input.length; y < r; y++) {
+		for (var yy = 0; yy < input[y].length; yy++) {
+			if (input[y].charAt(yy) == "!" || input[y].charAt(yy) == "?" || input[y].charAt(yy) == "." || input[y].charAt(yy) == ",") {
+				input[y] += input[y].charAt(yy);
+				input[y] = input[y].replace(input[y].charAt(yy), '');
+			}
+		}
+	}
+
+	// Convert the array back into a string
+	input = input.join(' ');
+	console.log(input);
+}
+
+pigLatin('Winter in Montreal is very, very cold.');
+
+</script>
+
+</body>
+</html>
